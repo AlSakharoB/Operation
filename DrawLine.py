@@ -38,3 +38,4 @@ def DrawLine(a, b):
 
 def setPixel(x, y, c, char):
     c[y][x] = char
+

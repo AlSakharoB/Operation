@@ -1,4 +1,4 @@
-def DrawFullCircle(a, b):
+def DrawCircle(a, b):
     c = [[a[2] for j in range(int(a[0]))] for i in range(int(a[1]))]
     disp_x = int(b[1])
     disp_y = int(b[2])
@@ -9,10 +9,10 @@ def DrawFullCircle(a, b):
     delta = (1 - 2 * r)
     error = 0
     while y >= 0:
-        setPixel(disp_x + x, disp_y + y, c, char, disp_x)
-        setPixel(disp_x + x, disp_y - y, c, char, disp_x)
-        setPixel(disp_x - x, disp_y + y, c, char, disp_x)
-        setPixel(disp_x - x, disp_y - y, c, char, disp_x)
+        setPixel(disp_x + x, disp_y + y, c, char)
+        setPixel(disp_x + x, disp_y - y, c, char)
+        setPixel(disp_x - x, disp_y + y, c, char)
+        setPixel(disp_x - x, disp_y - y, c, char)
 
         error = 2 * (delta + y) - 1
         if ((delta < 0) and (error <= 0)):
@@ -31,11 +31,5 @@ def DrawFullCircle(a, b):
         print(*i)
 
 
-def setPixel(x, y, c, char, ce):
-    start = x
-    end = ce
-    if end < start:
-        end, start = start, end
-    for i in range(start, end + 1):
-        c[y][i] = char
-
+def setPixel(x, y, c, char):
+    c[y][x] = char
