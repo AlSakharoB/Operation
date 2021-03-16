@@ -1,4 +1,10 @@
-def DrawFullCircle(a, b):
+from colorama import Fore
+import OutColor
+
+
+def DrawFullCircle(a, b, save, color='W'):
+    if save == 1:
+        fout = open('result_operation_file.it', 'w')
     c = [[a[2] for j in range(int(a[0]))] for i in range(int(a[1]))]
     disp_x = int(b[1])
     disp_y = int(b[2])
@@ -27,8 +33,21 @@ def DrawFullCircle(a, b):
         x += 1
         delta = delta + (2 * (x - y))
         y -= 1
-    for i in c:
-        print(*i)
+    for i in range(len(c)):
+        for j in range(len(c[i])):
+            if c[i][j] == b[4]:
+                print(OutColor.OutColor(color, c[i][j]), end=' ')
+                if save == 1:
+                    fout.write(c[i][j] + '  ')
+            else:
+                print(Fore.WHITE + c[i][j], end='  ')
+                if save == 1:
+                    fout.write(c[i][j] + '  ')
+        print()
+        if save == 1:
+            fout.write('\n')
+    if save == 1:
+        fout.close()
 
 
 def setPixel(x, y, c, char, ce):
