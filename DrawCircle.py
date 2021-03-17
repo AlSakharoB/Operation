@@ -1,4 +1,3 @@
-from colorama import Fore
 import OutColor
 import ReadOpeartionFile
 
@@ -25,16 +24,15 @@ def DrawCircle(a, b, save, color='W'):
         error = 2 * (delta + y) - 1
         if delta < 0 and error <= 0:
             x += 1
-            delta = delta + (2 * x + 1)
+            delta += (2 * x + 1)
             continue
-        error = 2 * (delta - x) - 1
         if delta > 0 and error > 0:
             y -= 1
-            delta = delta + (1 - 2 * y)
+            delta -= (2 * y + 1)
             continue
         x += 1
-        delta = delta + (2 * (x - y))
         y -= 1
+        delta += (2 * (x - y))
     OutColor.Print_(c, b, color, save)
 
 
