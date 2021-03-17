@@ -1,3 +1,3 @@
-11 11 &
-C 5 5 4 * R
+75 75 &
+c 37 37 37 * G
 python Oper.py "operation.it" "--save"

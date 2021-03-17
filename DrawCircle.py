@@ -21,7 +21,7 @@ def DrawCircle(a, b, save, color='W'):
         setPixel(disp_x + x, disp_y - y, c, char)
         setPixel(disp_x - x, disp_y + y, c, char)
         setPixel(disp_x - x, disp_y - y, c, char)
-        error = 2 * (delta + y) - 1
+        error = 2 * (delta - y) - 1
         if delta < 0 and error <= 0:
             x += 1
             delta += (2 * x + 1)
