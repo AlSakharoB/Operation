@@ -1,18 +1,21 @@
 from colorama import Fore
 import OutColor
+import ReadOpeartionFile
+
+
+def Line(a, b, flag):
+    if len(b) > 6:
+        b = ReadOpeartionFile.check2(a, b)
+        DrawLine(a, b, flag, b[6])
+    else:
+        b = ReadOpeartionFile.check1(a, b)
+        DrawLine(a, b, flag)
 
 
 def DrawLine(a, b, save, color='W'):
-    if save == 1:
-        fout = open('result_operation_file.it', 'w')
-    pix = [[]]
-    c = [[a[2] for j in range(int(a[0]))] for i in range(int(a[1]))]
-    x1 = int(b[1])
-    x2 = int(b[3])
-    y1 = int(b[2])
-    y2 = int(b[4])
-    dx = x2 - x1
-    dy = y2 - y1
+    c, x1, x2, y1, y2 = [[a[2] for j in range(int(a[0]))] for i in range(int(a[1]))], int(b[1]), int(b[3]), int(b[2]),\
+                        int(b[4])
+    dx, dy = x2 - x1, y2 - y1
     sign_x = 1 if dx > 0 else -1 if dx < 0 else 0
     sign_y = 1 if dy > 0 else -1 if dy < 0 else 0
     if dx < 0:
@@ -32,28 +35,12 @@ def DrawLine(a, b, save, color='W'):
         error -= es
         if error < 0:
             error += el
-            x += sign_x
-            y += sign_y
+            x, y = x + sign_x, y + sign_y
         else:
-            x += pdx
-            y += pdy
+            x, y = x + pdx, y + pdy
         t += 1
         setPixel(x, y, c, b[5])
-    for i in range(len(c)):
-        for j in range(len(c[i])):
-            if c[i][j] == b[5]:
-                print(OutColor.OutColor(color, c[i][j]), end=' ')
-                if save == 1:
-                    fout.write(c[i][j] + '  ')
-            else:
-                print(Fore.WHITE + c[i][j], end='  ')
-                if save == 1:
-                    fout.write(c[i][j] + '  ')
-        print()
-        if save == 1:
-            fout.write('\n')
-    if save == 1:
-        fout.close()
+    OutColor.Print_(c, b, color, save)
 
 
 def setPixel(x, y, c, char):
